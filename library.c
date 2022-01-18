@@ -9,7 +9,10 @@ struct arvoreABB {
     struct arvoreABB *dir,*esq;
 };
 
-int altura(ArvoreABB a) {
+int AddAluno(int curso,int anoIngresso)
+
+
+int altura(ArvoreBin a) {
     if(a == NULL)
         return 0;
     else {
@@ -23,7 +26,7 @@ int altura(ArvoreABB a) {
     }
 }
 
-int balanceamento(ArvoreABB a) {
+int balanceamento(ArvoreBin a) {
     if(a == NULL)
         return 1;
     else {
