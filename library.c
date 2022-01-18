@@ -4,9 +4,21 @@
 #include <string.h>
 #include <math.h>
 
-struct arvoreABB {
-    void* chave;
-    struct arvoreABB *dir,*esq;
+struct alunos{
+    int curso;
+    int anoIngresso;
+};
+
+struct professores{
+    float salario;
+    int anoIngresso;
+};
+
+struct arvoreBin {
+    int chave;
+    int tipo;
+    void *obj;
+    struct arvoreBin *dir,*esq;
 };
 
 int AddAluno(int curso,int anoIngresso)
@@ -45,16 +57,71 @@ int balanceamento(ArvoreBin a) {
 
 /*Verificar se um elemento existe*/
 
-int Existe(ArvoreABB a, void *x){
-	if(a == NULL){
+int existe(ArvoreBin a, int x) {
+	if(a == NULL) {
 		return 0;
-	}else if(a == x) {
+	}else if(a->chave == x) {
 		return 1;
 	}else {
-		int ret = Existe(a->esq,x);
+		int ret = existe(a->esq,x);
 		if(ret == 1) {
 			return 1;
 		}
-		return Existe(a->dir,x);
+		return existe(a->dir,x);
 	}
+}
+
+ArvoreBin *inserir(ArvoreBin a, char lado, int chave, void* objeto) {
+    if(a == NULL) {
+        a = (ArvoreBin *) malloc(sizeof(ArvoreBin));
+        a->chave = chave;
+        a->obj = objeto;
+        a->esq = NULL;
+        a->dir = NULL;
+    }else{
+        if(a->dir==NULL && a->esq==NULL && lado=='e')
+            a->esq = inserir(a, lado, chave, objeto);
+        else if(a->dir==NULL && a->esq==NULL && lado=='d')
+            a->dir = inserir(a, lado, chave, objeto);
+        else{
+            a->esq = inserir(a, lado, chave, objeto);
+            a->dir = inserir(a, lado, chave, objeto);
+        }
+    }
+    return a;
+}
+
+void ImprimirNivel(ArvoreBin a,int cont, int nivel){
+    if(a!=NULL) {
+        if(cont == nivel)
+            printf("%d ",a->chave);
+        else {
+            ImprimirNivel(a->esq,cont+1,nivel);
+            ImprimirNivel(a->dir,cont+1,nivel);
+        }
+    }
+}
+
+void imprimirLargura(ArvoreBin a,int nivel) {
+    if(a != NULL) {
+        int h =  altura(a);
+        if(nivel<h) {
+            ImprimirNivel(a,0,nivel);
+            printf("\n");
+            imprimirLargura(a,nivel+1);
+        }
+    }
+}
+
+void* Buscar(ArvoreBin a, int chave){
+    int result = existe(a, chave);
+    if(result == 0)
+        printf("Elemento não existe\n");
+    else
+        if(a->chave == chave)
+            return a->chave;
+        else {
+            return Buscar(a->esq,chave);
+            return Buscar(a->dir,chave);
+        }
 }
