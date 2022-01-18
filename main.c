@@ -1,5 +1,8 @@
-#include"library.h"
+#include "library.h"
+#include <stdio.h>
 
-int main(){
+int main() {
+    ArvoreABB *a = NULL;
+    printf("%d %d",altura(a),balanceamento(a));
     return 0;
 }

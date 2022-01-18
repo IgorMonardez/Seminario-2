@@ -5,10 +5,10 @@ typedef struct arvoreABB *ArvoreABB;
 
 // Altura da arvore
 
-int altura(ArvoreABB *a);
+int altura(ArvoreABB a);
 
 // Balanceamento da arvore
 
-int balanceamento(ArvoreABB *a);
+int balanceamento(ArvoreABB a);
 
 #endif //SEMINARIO_2_LIBRARY_H

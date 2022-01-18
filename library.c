@@ -4,12 +4,12 @@
 #include <string.h>
 #include <math.h>
 
-typedef struct arvoreABB {
+struct arvoreABB {
     void* chave;
-    struct arvore *dir,*esq;
-}ArvoreABB;
+    struct arvoreABB *dir,*esq;
+};
 
-int altura(ArvoreABB *a) {
+int altura(ArvoreABB a) {
     if(a == NULL)
         return 0;
     else {
@@ -23,7 +23,7 @@ int altura(ArvoreABB *a) {
     }
 }
 
-int balanceamento(ArvoreABB *a) {
+int balanceamento(ArvoreABB a) {
     if(a == NULL)
         return 1;
     else {
@@ -35,7 +35,7 @@ int balanceamento(ArvoreABB *a) {
             int ret = balanceamento(a->esq);
             if(ret == 1)
                 return 1;
-            return balanceamento(a->dir)
+            return balanceamento(a->dir);
         }
     }
 }

@@ -3,4 +3,4 @@ project(Seminario_2 C)
 
 set(CMAKE_C_STANDARD 99)
 
-add_library(Seminario_2 SHARED library.c)
+add_executable(Seminario-2/library.h library.c main.c)
