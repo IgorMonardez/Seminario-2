@@ -11,4 +11,8 @@ int altura(ArvoreABB a);
 
 int balanceamento(ArvoreABB a);
 
+/*Procurar elemento na arvore*/
+int Existe(ArvoreABB a, void *x);
+
+
 #endif //SEMINARIO_2_LIBRARY_H

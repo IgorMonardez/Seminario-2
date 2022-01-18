@@ -39,3 +39,19 @@ int balanceamento(ArvoreABB a) {
         }
     }
 }
+
+/*Verificar se um elemento existe*/
+
+int Existe(ArvoreABB a, void *x){
+	if(a == NULL){
+		return 0;
+	}else if(a == x) {
+		return 1;
+	}else {
+		int ret = Existe(a->esq,x);
+		if(ret == 1) {
+			return 1;
+		}
+		return Existe(a->dir,x);
+	}
+}
