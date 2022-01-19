@@ -21,8 +21,9 @@ struct arvoreBin {
     struct arvoreBin *dir,*esq;
 };
 
-int AddAluno(int curso,int anoIngresso)
+int AddAluno(int curso,int anoIngresso) {
 
+}
 
 int altura(ArvoreBin a) {
     if(a == NULL)
@@ -71,9 +72,9 @@ int existe(ArvoreBin a, int x) {
 	}
 }
 
-ArvoreBin *inserir(ArvoreBin a, char lado, int chave, void* objeto) {
+ArvoreBin inserir(ArvoreBin a, char lado, int chave, void* objeto) {
     if(a == NULL) {
-        a = (ArvoreBin *) malloc(sizeof(ArvoreBin));
+        a = (ArvoreBin*) malloc(sizeof(ArvoreBin));
         a->chave = chave;
         a->obj = objeto;
         a->esq = NULL;
@@ -119,7 +120,7 @@ void* Buscar(ArvoreBin a, int chave){
         printf("Elemento não existe\n");
     else
         if(a->chave == chave)
-            return a->chave;
+            return a->obj;
         else {
             return Buscar(a->esq,chave);
             return Buscar(a->dir,chave);

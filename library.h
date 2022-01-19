@@ -20,5 +20,12 @@ int existe(ArvoreBin a, int x);
 void ImprimirNivel(ArvoreBin a,int cont,int nivel);
 void imprimirLargura(ArvoreBin a,int nivel);
 
+//Inserir elementos
+
+ArvoreBin inserir(ArvoreBin a, char lado, int chave, void* objeto);
+
+//Buscar elemento
+
+void* Buscar(ArvoreBin a, int chave);
 
 #endif //SEMINARIO_2_LIBRARY_H
