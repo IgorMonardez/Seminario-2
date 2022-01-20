@@ -5,11 +5,13 @@
 #include <math.h>
 
 struct alunos{
+    char nome[100];
     int curso;
     int anoIngresso;
 };
 
 struct professores{
+    char nome[100];
     float salario;
     int anoIngresso;
 };
@@ -74,8 +76,8 @@ int existe(ArvoreBin a, int x) {
 
 ArvoreBin inserir(ArvoreBin a, char lado,int tipo, int chave, void* objeto) {
     if(a == NULL) {
-        a = (ArvoreBin)malloc(sizeof(ArvoreBin));
         a->chave = chave;
+        a->tipo = tipo;
         a->obj = objeto;
         a->esq = NULL;
         a->dir = NULL;
@@ -125,4 +127,23 @@ void* Buscar(ArvoreBin a, int chave){
             return Buscar(a->esq,chave);
             return Buscar(a->dir,chave);
         }
+}
+
+void imprimir(void* objeto,int tipo) {
+    switch(tipo) {
+    case 1 : {
+        struct alunos *a= (struct alunos*)malloc(sizeof(struct alunos));
+        a = objeto;
+        printf("Curso- %d\n",a->curso);
+        printf("Ano de ingresso - %d\n",a->anoIngresso);
+    }
+    break;
+    case 2: {
+        struct professores *p = (struct professores*) malloc(sizeof(struct professores));
+        p = objeto;
+        printf("Salário- %.2f",p->salario);
+        printf("Ano de ingresso- %d",p->anoIngresso);
+    }
+    break;
+    }
 }
