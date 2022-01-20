@@ -4,17 +4,8 @@
 #include <string.h>
 #include <math.h>
 
-struct alunos{
-    char nome[100];
-    int curso;
-    int anoIngresso;
-};
 
-struct professores{
-    char nome[100];
-    float salario;
-    int anoIngresso;
-};
+
 
 struct arvoreBin {
     int chave;
@@ -22,10 +13,6 @@ struct arvoreBin {
     void *obj;
     struct arvoreBin *dir,*esq;
 };
-
-int AddAluno(int curso,int anoIngresso) {
-
-}
 
 int altura(ArvoreBin a) {
     if(a == NULL)
@@ -129,21 +116,3 @@ void* Buscar(ArvoreBin a, int chave){
         }
 }
 
-void imprimir(void* objeto,int tipo) {
-    switch(tipo) {
-    case 1 : {
-        struct alunos *a= (struct alunos*)malloc(sizeof(struct alunos));
-        a = objeto;
-        printf("Curso- %d\n",a->curso);
-        printf("Ano de ingresso - %d\n",a->anoIngresso);
-    }
-    break;
-    case 2: {
-        struct professores *p = (struct professores*) malloc(sizeof(struct professores));
-        p = objeto;
-        printf("Salário- %.2f",p->salario);
-        printf("Ano de ingresso- %d",p->anoIngresso);
-    }
-    break;
-    }
-}

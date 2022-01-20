@@ -1,8 +1,8 @@
 #ifndef SEMINARIO_2_LIBRARY_H
 #define SEMINARIO_2_LIBRARY_H
+
 typedef struct arvoreBin *ArvoreBin;
-typedef struct alunos *Alunos;
-typedef struct professores *Professores;
+
 // Altura da arvore
 
 int altura(ArvoreBin a);
@@ -27,5 +27,6 @@ ArvoreBin inserir(ArvoreBin a, char lado,int tipo, int chave, void* objeto);
 //Buscar elemento
 
 void* Buscar(ArvoreBin a, int chave);
+
 
 #endif //SEMINARIO_2_LIBRARY_H
