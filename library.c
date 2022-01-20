@@ -4,9 +4,6 @@
 #include <string.h>
 #include <math.h>
 
-
-
-
 struct arvoreBin {
     int chave;
     int tipo;
@@ -63,20 +60,24 @@ int existe(ArvoreBin a, int x) {
 
 ArvoreBin inserir(ArvoreBin a, char lado,int tipo, int chave, void* objeto) {
     if(a == NULL) {
-        a->chave = chave;
-        a->tipo = tipo;
-        a->obj = objeto;
-        a->esq = NULL;
-        a->dir = NULL;
-    }else{
+        ArvoreBin resp = (ArvoreBin) malloc(sizeof(ArvoreBin));
+        resp->chave = chave;
+        resp->tipo = tipo;
+        resp->obj = objeto;
+        resp->esq = NULL;
+        resp->dir = NULL;
+        a = resp;
+    }
+    else {
         if(a->dir==NULL && a->esq==NULL && lado=='e')
-            a->esq = inserir(a, lado, chave,tipo, objeto);
-        else if(a->dir==NULL && a->esq==NULL && lado=='d')
-            a->dir = inserir(a, lado, chave,tipo, objeto);
-        else{
-            a->esq = inserir(a, lado, chave,tipo, objeto);
-            a->dir = inserir(a, lado, chave,tipo, objeto);
-        }
+            a->esq = inserir(a->esq, lado, chave,tipo, objeto);
+        else
+            if(a->dir==NULL && a->esq==NULL && lado=='d')
+                a->dir = inserir(a->dir, lado, chave,tipo, objeto);
+            else {
+                a->esq = inserir(a->esq, lado, chave,tipo, objeto);
+                a->dir = inserir(a->dir, lado, chave,tipo, objeto);
+            }
     }
     return a;
 }
@@ -103,7 +104,20 @@ void imprimirLargura(ArvoreBin a,int nivel) {
     }
 }
 
-void* Buscar(ArvoreBin a, int chave){
+int BuscarTipo(ArvoreBin a,int chave) {
+    int result = existe(a, chave);
+        if(result == 0)
+            printf("Elemento não existe\n");
+        else
+            if(a->chave == chave)
+                return a->tipo;
+            else {
+                return BuscarTipo(a->esq,chave);
+                return BuscarTipo(a->dir,chave);
+            }
+}
+
+void* Buscar(ArvoreBin a, int chave) {
     int result = existe(a, chave);
     if(result == 0)
         printf("Elemento não existe\n");
@@ -115,4 +129,3 @@ void* Buscar(ArvoreBin a, int chave){
             return Buscar(a->dir,chave);
         }
 }
-

@@ -26,6 +26,7 @@ ArvoreBin inserir(ArvoreBin a, char lado,int tipo, int chave, void* objeto);
 
 //Buscar elemento
 
+int BuscarTipo(ArvoreBin a,int chave);
 void* Buscar(ArvoreBin a, int chave);
 
 
