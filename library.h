@@ -22,7 +22,7 @@ void imprimirLargura(ArvoreBin a,int nivel);
 
 //Inserir elementos
 
-ArvoreBin inserir(ArvoreBin a, char lado, int chave, void* objeto);
+ArvoreBin inserir(ArvoreBin a, char lado,int tipo, int chave, void* objeto);
 
 //Buscar elemento
 

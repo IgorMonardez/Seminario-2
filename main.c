@@ -3,24 +3,27 @@
 #include <stdlib.h>
 
 int main() { //aluno
-    ArvoreBin *a = NULL;
+    ArvoreBin a = NULL;
 
     int resp = 0;
     while (resp!=-1){
         printf("<1>- inserir elemento\n<2>- verificar se elemento existe\n<3>- Imprimir a heap\n<4>- verificar se é balanceada\n<5>- calcular altura\n<6>- IMprimir em largura\n<7>- sair\nresp: ");
         scanf("%d",&resp);
         if (resp==1){
-            int resp2;
+            int resp2,tipo;
             printf("Digite a chave do elemento: ");
             scanf("%d", &resp2);
-            Alunos a = (Alunos*) malloc(sizeof(Alunos));
+            printf("Digite o tipo do elemento: ");
+            scanf("%d", &tipo);
+            Alunos alunos;
+            char lado;
+            lado = getc(stdin);
             int curso, anoIngresso;
             printf("Digite o código do curso do aluno: ");
-            scanf("%d", a->curso);
+            scanf("%d", &alunos.curso);
             printf("Digite o ano de ingresso do aluno: ");
-            scanf("%d", &a->anoIngresso);
-
-            inserir(heap, resp2);
+            scanf("%d", &alunos.anoIngresso);
+            inserir(a,lado,tipo,resp2,alunos);
         }
         if(resp==2){
             int resp2;
