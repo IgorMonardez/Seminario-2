@@ -60,28 +60,42 @@ int existe(ArvoreBin a, int x) {
 
 ArvoreBin inserir(ArvoreBin a, char lado,int tipo, int chave, void* objeto) {
     if(a == NULL) {
-        a = (ArvoreBin) malloc(sizeof(ArvoreBin));
         a->chave = chave;
         a->tipo = tipo;
         a->obj = objeto;
         a->esq = NULL;
         a->dir = NULL;
-        printf("%d", a->chave);
         return a;
     }
     else {
-        if(a->dir==NULL && a->esq==NULL && lado=='e')
-            a->esq = inserir(a->esq, lado, chave,tipo, objeto);
+        if(lado == 'e') {
+            if(a->esq == NULL)
+                a->esq = inserir(a->esq,lado,chave,tipo,objeto);
+            else
+                if(a->dir == NULL) {
+                    int hd = altura(a->esq);
+                    if(hd >= 2)
+                        a->dir = inserir(a->dir,lado,chave,tipo,objeto);
+                    else
+                        a->esq =  inserir(a->esq,lado,chave,tipo,objeto);
+                }
+        }
         else {
-            if (a->dir == NULL && a->esq == NULL && lado == 'd')
-                a->dir = inserir(a->dir, lado, chave, tipo, objeto);
-            else {
-                a->esq = inserir(a->esq, lado, chave, tipo, objeto);
-                a->dir = inserir(a->dir, lado, chave, tipo, objeto);
+            if(lado == 'd') {
+                if(a->dir == NULL)
+                    a->dir = inserir(a->dir,lado,chave,tipo,objeto);
+                else
+                    if(a->esq == NULL) {
+                        int he = altura(a->dir);
+                        if(he >= 2)
+                            a->esq = inserir(a->esq,lado,chave,tipo,objeto);
+                        else
+                            a->dir = inserir(a->dir,lado,chave,tipo,objeto);
+                    }
             }
         }
+        return a;
     }
-    return a;
 }
 
 void imprimirNivel(ArvoreBin a,int cont, int nivel){
