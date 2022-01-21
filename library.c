@@ -60,7 +60,7 @@ int existe(ArvoreBin a, int x) {
 
 ArvoreBin inserir(ArvoreBin a, char lado,int tipo, int chave, void* objeto) {
     if(a == NULL) {
-        a = (ArvoreBin) malloc(sizeof(ArvoreBin));
+        a = (ArvoreBin) malloc(sizeof(struct arvoreBin));
         a->chave = chave;
         a->tipo = tipo;
         a->obj = objeto;
@@ -71,13 +71,13 @@ ArvoreBin inserir(ArvoreBin a, char lado,int tipo, int chave, void* objeto) {
     }
     else {
         if(a->dir==NULL && a->esq==NULL && lado=='e')
-            a->esq = inserir(a->esq, lado, chave,tipo, objeto);
+            a->esq = inserir(a->esq, lado, tipo, chave, objeto);
         else {
             if (a->dir == NULL && a->esq == NULL && lado == 'd')
-                a->dir = inserir(a->dir, lado, chave, tipo, objeto);
+                a->dir = inserir(a->dir, lado, tipo, chave, objeto);
             else {
-                a->esq = inserir(a->esq, lado, chave, tipo, objeto);
-                a->dir = inserir(a->dir, lado, chave, tipo, objeto);
+                a->esq = inserir(a->esq, lado, tipo, chave, objeto);
+                a->dir = inserir(a->dir, lado, tipo, chave, objeto);
 
             }
         }

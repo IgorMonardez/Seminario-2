@@ -65,7 +65,7 @@ int main() { //aluno
                 scanf("%d", &curso);
                 printf("Digite o ano de ingresso do aluno:");
                 scanf("%d", &anoIngresso);
-                a = inserir(a,lado,tipo,resp2,AddAluno(curso,anoIngresso));
+                a = inserir(a,lado,tipo,resp2,AddAluno(curso, anoIngresso));
             }
         }
         if(resp==2){
