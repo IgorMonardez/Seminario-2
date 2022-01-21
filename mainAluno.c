@@ -92,8 +92,8 @@ int main() { //aluno
         }
         if(resp==7){
             resp = -1;
+            a = Destruir(a);
         }
-
     }
     return 0;
 }

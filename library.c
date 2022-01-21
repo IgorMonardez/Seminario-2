@@ -118,3 +118,12 @@ void* Buscar(ArvoreBin a, int chave) {
             return Buscar(a->dir,chave);
     }
 }
+
+ArvoreBin Destruir(ArvoreBin a) {
+    if(a!=NULL) {
+        a->esq = Destruir(a->esq);
+        a->dir = Destruir(a->dir);
+        free(a);
+    }
+    return NULL;
+}

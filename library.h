@@ -24,7 +24,12 @@ void imprimirLargura(ArvoreBin a,int nivel);
 ArvoreBin inserir(ArvoreBin a, char lado, int chave, void* objeto, int noPai);
 
 //Buscar elemento
+
 void* Buscar(ArvoreBin a, int chave);
+
+//Destruir a arvore
+
+ArvoreBin Destruir(ArvoreBin a);
 
 
 #endif //SEMINARIO_2_LIBRARY_H
