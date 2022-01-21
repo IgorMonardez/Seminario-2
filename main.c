@@ -33,10 +33,10 @@ void imprimir(void* pVoid, int tipo) {
 }
 
 Alunos *AddAluno(int curso, int anoIngresso) {
-    Alunos *a = (Alunos*)malloc(sizeof(Alunos));
-    a->curso = curso;
-    a->anoIngresso = anoIngresso;
-    return a;
+    Alunos *aux = (Alunos*)malloc(sizeof(Alunos));
+    aux->curso = curso;
+    aux->anoIngresso = anoIngresso;
+    return aux;
 }
 
 
