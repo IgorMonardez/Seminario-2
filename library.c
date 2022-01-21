@@ -45,50 +45,52 @@ int balanceamento(ArvoreBin a) {
 /*Verificar se um elemento existe*/
 
 int existe(ArvoreBin a, int x) {
-	if(a == NULL) {
-		return 0;
-	}else if(a->chave == x) {
-		return 1;
-	}else {
-		int ret = existe(a->esq,x);
-		if(ret == 1) {
-			return 1;
-		}
-		return existe(a->dir,x);
-	}
+    if(a == NULL) {
+        return 0;
+    }else if(a->chave == x) {
+        return 1;
+    }else {
+        int ret = existe(a->esq,x);
+        if(ret == 1) {
+            return 1;
+        }
+        return existe(a->dir,x);
+    }
 }
 
 ArvoreBin inserir(ArvoreBin a, char lado,int tipo, int chave, void* objeto) {
     if(a == NULL) {
-        ArvoreBin resp = (ArvoreBin) malloc(sizeof(ArvoreBin));
-        resp->chave = chave;
-        resp->tipo = tipo;
-        resp->obj = objeto;
-        resp->esq = NULL;
-        resp->dir = NULL;
-        a = resp;
+        a = (ArvoreBin) malloc(sizeof(ArvoreBin));
+        a->chave = chave;
+        a->tipo = tipo;
+        a->obj = objeto;
+        a->esq = NULL;
+        a->dir = NULL;
+        printf("%d", a->chave);
+        return a;
     }
     else {
         if(a->dir==NULL && a->esq==NULL && lado=='e')
             a->esq = inserir(a->esq, lado, chave,tipo, objeto);
-        else
-            if(a->dir==NULL && a->esq==NULL && lado=='d')
-                a->dir = inserir(a->dir, lado, chave,tipo, objeto);
+        else {
+            if (a->dir == NULL && a->esq == NULL && lado == 'd')
+                a->dir = inserir(a->dir, lado, chave, tipo, objeto);
             else {
-                a->esq = inserir(a->esq, lado, chave,tipo, objeto);
-                a->dir = inserir(a->dir, lado, chave,tipo, objeto);
+                a->esq = inserir(a->esq, lado, chave, tipo, objeto);
+                a->dir = inserir(a->dir, lado, chave, tipo, objeto);
             }
+        }
     }
     return a;
 }
 
-void ImprimirNivel(ArvoreBin a,int cont, int nivel){
+void imprimirNivel(ArvoreBin a,int cont, int nivel){
     if(a!=NULL) {
         if(cont == nivel)
             printf("%d ",a->chave);
         else {
-            ImprimirNivel(a->esq,cont+1,nivel);
-            ImprimirNivel(a->dir,cont+1,nivel);
+            imprimirNivel(a->esq,cont+1,nivel);
+            imprimirNivel(a->dir,cont+1,nivel);
         }
     }
 }
@@ -97,24 +99,28 @@ void imprimirLargura(ArvoreBin a,int nivel) {
     if(a != NULL) {
         int h =  altura(a);
         if(nivel<h) {
-            ImprimirNivel(a,0,nivel);
+            imprimirNivel(a,0,nivel);
             printf("\n");
             imprimirLargura(a,nivel+1);
         }
     }
 }
 
-int BuscarTipo(ArvoreBin a,int chave) {
+int BuscarTipo(ArvoreBin a, int chave) {
     int result = existe(a, chave);
-        if(result == 0)
-            printf("Elemento não existe\n");
+    if(result == 0)
+        printf("Elemento não existe\n");
+    else
+    if(a->chave == chave)
+        return a->tipo;
+    else {
+        int aux = 0;
+        aux = BuscarTipo(a->esq,chave);
+        if(aux!=0)
+            return aux;
         else
-            if(a->chave == chave)
-                return a->tipo;
-            else {
-                return BuscarTipo(a->esq,chave);
-                return BuscarTipo(a->dir,chave);
-            }
+            return BuscarTipo(a->dir,chave);
+    }
 }
 
 void* Buscar(ArvoreBin a, int chave) {
@@ -122,10 +128,13 @@ void* Buscar(ArvoreBin a, int chave) {
     if(result == 0)
         printf("Elemento não existe\n");
     else
-        if(a->chave == chave)
-            return a->obj;
-        else {
-            return Buscar(a->esq,chave);
+    if(a->chave == chave)
+        return a->obj;
+    else {
+        void *aux = Buscar(a->esq,chave);
+        if(aux!=NULL)
+            return aux;
+        else
             return Buscar(a->dir,chave);
-        }
+    }
 }

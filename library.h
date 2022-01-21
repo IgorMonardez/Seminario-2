@@ -17,7 +17,7 @@ int existe(ArvoreBin a, int x);
 
 //Imprimir Largura e função auxiliar
 
-void ImprimirNivel(ArvoreBin a,int cont,int nivel);
+void imprimirNivel(ArvoreBin a,int cont,int nivel);
 void imprimirLargura(ArvoreBin a,int nivel);
 
 //Inserir elementos

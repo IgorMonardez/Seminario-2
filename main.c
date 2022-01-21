@@ -13,28 +13,27 @@ typedef struct professores{
     int anoIngresso;
 }Professores;
 
-void imprimir(void* objeto,int tipo) {
+void imprimir(void* pVoid, int tipo) {
     switch(tipo) {
-    case 1 : {
-        Alunos *a= (Alunos*)malloc(sizeof(Alunos));
-        a = objeto;
-        printf("Curso- %d\n",a->curso);
-        printf("Ano de ingresso - %d\n",a->anoIngresso);
-    }
-    break;
-    case 2: {
-        Professores *p = (Professores*) malloc(sizeof(Professores));
-        p = objeto;
-        printf("Salário- %.2f",p->salario);
-        printf("Ano de ingresso- %d",p->anoIngresso);
-    }
-    break;
+        case 1 : {
+            Alunos *a;
+            a = (Alunos*) pVoid;
+            printf("Curso - %d\n",a->curso);
+            printf("Ano de ingresso - %d\n",a->anoIngresso);
+        }
+            break;
+        case 2: {
+            Professores *p;
+            p = (Professores*)pVoid;
+            printf("Salário- %.2f",p->salario);
+            printf("Ano de ingresso- %d",p->anoIngresso);
+        }
+            break;
     }
 }
 
 Alunos *AddAluno(int curso, int anoIngresso) {
-    struct alunos *a = (struct alunos*)malloc(sizeof(struct alunos));
-
+    Alunos *a = (Alunos*)malloc(sizeof(Alunos));
     a->curso = curso;
     a->anoIngresso = anoIngresso;
     return a;
@@ -46,34 +45,32 @@ int main() { //aluno
     ArvoreBin a = NULL;
     int resp = 0;
     while (resp!=-1){
-        printf("<1>- Inserir elemento\n<2>- Verificar se elemento existe\n<3>- Buscar o elemento e imprimi-lo\n<4>- Verificar se e balanceada\n<5>- Calcular altura\n<6>- Imprimir em largura\n<7>- Sair\nresp: ");
+        printf("<1>- Inserir elemento\n<2>- Verificar se elemento existe\n<3>- Buscar o elemento e imprimi-lo\n<4>- Verificar se e balanceada\n<5>- Calcular altura\n<6>- Imprimir em largura\n<7>- Sair\nresp:");
         scanf("%d",&resp);
         if (resp==1){
             int resp2,tipo;
-            printf("Digite a chave do elemento: ");
+            printf("Digite a chave do elemento:");
             scanf("%d", &resp2);
-            printf("Digite o tipo do elemento: ");
+            printf("Digite o tipo do elemento:");
             scanf("%d", &tipo);
-            fflush(stdin);
             if(tipo == 1) {
-                Alunos *alunos = (Alunos*)malloc(sizeof(Alunos));
                 char lado;
-                char nome[100];
-                printf("Qual lado: (1-direito, 2- esquerdo)");
-                scanf(" %c",&lado);
-                fflush(stdin);
+                if(a!=NULL){
+                    printf("Qual lado (d-direito, e- esquerdo):");
+                    scanf(" %c",&lado);
+                    fflush(stdin);
+                }
                 int curso, anoIngresso;
-                printf("Digite o código do curso do aluno: ");
+                printf("Digite o codigo do curso do aluno:");
                 scanf("%d", &curso);
-                printf("Digite o ano de ingresso do aluno: ");
+                printf("Digite o ano de ingresso do aluno:");
                 scanf("%d", &anoIngresso);
-                alunos = AddAluno(curso,anoIngresso);
-                a = inserir(a,lado,tipo,resp2,alunos);
+                a = inserir(a,lado,tipo,resp2,AddAluno(curso,anoIngresso));
             }
         }
         if(resp==2){
             int resp2;
-            printf("Digite o elemento a ser verificado: ");
+            printf("Digite o elemento a ser verificado:");
             scanf("%d", &resp2);
             if(existe(a,resp2))
                 printf("O elementos %d existe\n",resp2);
@@ -82,13 +79,13 @@ int main() { //aluno
         }
         if(resp==3){
             int resp2;
-            printf("Digite o elemento a ser buscado: ");
+            printf("Digite o elemento a ser buscado:");
             scanf("%d", &resp2);
-            int tipo = BuscarTipo(a,resp2);
-            if(tipo == 1) {
-                Alunos *alunos = (Alunos*) malloc(sizeof(Alunos));
+            int i = BuscarTipo(a, resp2);
+            if(i == 1) {
+                Alunos *alunos;
                 alunos = Buscar(a,resp2);
-                imprimir(alunos,tipo);
+                imprimir(alunos, i);
             }
         }
         if(resp==4){
