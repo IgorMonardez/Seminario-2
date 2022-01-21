@@ -15,7 +15,7 @@ int balanceamento(ArvoreBin a);
 
 int existe(ArvoreBin a, int x);
 
-//Imprimir Largura e função auxiliar
+//Imprimir Largura
 
 void imprimirLargura(ArvoreBin a,int nivel);
 

@@ -86,8 +86,8 @@ void imprimirNivel(ArvoreBin a,int cont, int nivel){
         if(cont == nivel)
             printf("%d ",a->chave);
         else {
-            imprimirNivel(a->esq,cont+1,nivel);
             imprimirNivel(a->dir,cont+1,nivel);
+            imprimirNivel(a->esq,cont+1,nivel);
         }
     }
 }

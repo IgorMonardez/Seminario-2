@@ -3,26 +3,29 @@
 #include <stdlib.h>
 #include <string.h>
 
-typedef struct professores{
-    int matricula;
-    char nome[100];
-    float salario;
-}Professores;
+typedef struct alunos{
+ int matriculaAluno;
+ char nomeAluno[100];
+ char curso[20];
+ int anoIngresso;
+}Alunos;
 
 void imprimir(void* pVoid) {
-    Professores *p;
-    p = (Professores*) pVoid;
-    printf("Matricula - %d\n",p->matricula);
-    printf("Nome - %s\n",p->nome);
-    printf("Salario - %.2f\n",p->salario);
+    Alunos *a;
+    a = (Alunos*) pVoid;
+    printf("Matricula - %d\n",a->matriculaAluno);
+    printf("Nome - %s\n",a->nomeAluno);
+    printf("Curso - %s\n",a->curso);
+    printf("Ano Ingresso - %d\n",a->anoIngresso);
 }
 
-Professores *AddProfessor(int matricula,char nome[100],float salario) {
-    Professores *p = (Professores*)malloc(sizeof(Professores));
-    p->matricula = matricula;
-    strcpy(p->nome,nome);
-    p->salario = salario;
-    return p;
+Alunos *AddAluno(int matricula,char nomeAluno[100],char curso[20], int anoIngresso) {
+    Alunos *a = (Alunos*)malloc(sizeof(Alunos));
+    a->matriculaAluno = matricula;
+    strcpy(a->nomeAluno,nomeAluno);
+    strcpy(a->curso,curso);
+    a->anoIngresso = anoIngresso;
+    return a;
 }
 
 int main() { //aluno
@@ -33,28 +36,30 @@ int main() { //aluno
         scanf("%d",&resp);
         if (resp==1){
             int resp2,noPai;
-            printf("> Digite a chave do elemento:");
+            printf("Digite a chave do elemento:");
             scanf("%d", &resp2);
             char lado;
-            char nome[100];
             if(a!=NULL){
-                printf("> Qual lado (d-direito, e- esquerdo): ");
+                printf("Qual lado (d-direito, e- esquerdo): ");
                 scanf(" %c",&lado);
                 fflush(stdin);
-                printf("> De qual no pai: ");
+                printf("De qual nó pai (chave): ");
                 scanf("%d",&noPai);
             }
-            int matricula;
-            double salario;
-            printf(">Digite a matricula do professor: ");
-            scanf("%d", &matricula);
+            char curso[20], nome[100];
+            int matriculaAluno, anoIngresso;
+            printf("Digite a matricula do aluno:");
+            scanf("%d", &matriculaAluno);
             fflush(stdin);
-            printf(">Digite o nome do professor: ");
-            scanf(" %s",nome);
+            printf("Digite o nome do aluno: ");
+            scanf(" %s", nome);
             fflush(stdin);
-            printf(">Digite o Salario do professor: ");
-            scanf("%lf", &salario);
-            a = inserir(a,lado,resp2,AddProfessor(matricula,nome,salario),noPai);
+            printf("Digite o curso do aluno: ");
+            scanf(" %s", curso);
+            fflush(stdin);
+            printf("Digite o ano de ingresso do aluno: ");
+            scanf("%d", &anoIngresso);
+            a = inserir(a,lado,resp2,AddAluno(matriculaAluno,nome,curso,anoIngresso),noPai);
         }
         if(resp==2){
             int resp2;
@@ -69,9 +74,9 @@ int main() { //aluno
             int resp2;
             printf("Digite o elemento a ser buscado:");
             scanf("%d", &resp2);
-            Professores *professores;
-            professores = Buscar(a,resp2);
-            imprimir(professores);
+            Alunos *alunos;
+            alunos = Buscar(a,resp2);
+            imprimir(alunos);
         }
         if(resp==4){
             if(balanceamento(a))
