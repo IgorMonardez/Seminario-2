@@ -8,28 +8,11 @@ typedef struct alunos {
     int anoIngresso;
 }Alunos;
 
-typedef struct professores{
-    float salario;
-    int anoIngresso;
-}Professores;
-
-void imprimir(void* pVoid, int tipo) {
-    switch(tipo) {
-        case 1 : {
+void imprimirAluno(void* pVoid) {
             Alunos *a;
             a = (Alunos*) pVoid;
             printf("Curso - %d\n",a->curso);
             printf("Ano de ingresso - %d\n",a->anoIngresso);
-        }
-            break;
-        case 2: {
-            Professores *p;
-            p = (Professores*)pVoid;
-            printf("Salário- %.2f",p->salario);
-            printf("Ano de ingresso- %d",p->anoIngresso);
-        }
-            break;
-    }
 }
 
 Alunos *AddAluno(int curso, int anoIngresso) {
@@ -40,33 +23,44 @@ Alunos *AddAluno(int curso, int anoIngresso) {
 }
 
 
-
+ArvoreBin inserirElemento(ArvoreBin a, char lado, int chave, int noPai){
+    int curso, anoIngresso;
+    printf("Digite o codigo do curso do aluno:");
+    scanf("%d", &curso);
+    printf("Digite o ano de ingresso do aluno:");
+    scanf("%d", &anoIngresso);
+    return inserir(a, lado, chave, AddAluno(curso, anoIngresso), noPai);
+}
 int main() { //aluno
     ArvoreBin a = NULL;
-    int resp = 0;
+    int resp = 0, noPai;
     while (resp!=-1){
         printf("<1>- Inserir elemento\n<2>- Verificar se elemento existe\n<3>- Buscar o elemento e imprimi-lo\n<4>- Verificar se e balanceada\n<5>- Calcular altura\n<6>- Imprimir em largura\n<7>- Sair\nresp:");
         scanf("%d",&resp);
         if (resp==1){
-            int resp2,tipo;
-            printf("Digite a chave do elemento:");
-            scanf("%d", &resp2);
-            printf("Digite o tipo do elemento:");
-            scanf("%d", &tipo);
-            if(tipo == 1) {
+            int resp2;
                 char lado;
                 if(a!=NULL){
-                    printf("Qual lado (d-direito, e- esquerdo):");
-                    scanf(" %c",&lado);
-                    fflush(stdin);
+                    printf("Digite o no pai:");
+                    scanf(" %d",&noPai);
+                    if(existe(a, noPai)==0){
+                        printf("No pai informado nao existe!\n");
+                    }
+                    else{
+                        printf("Digite a chave do elemento:");
+                        scanf("%d", &resp2);
+                        printf("Qual lado (d-direito, e- esquerdo):");
+                        scanf(" %c",&lado);
+                        fflush(stdin);
+                        a = inserirElemento(a, lado, resp2, noPai);
+                    }
+
                 }
-                int curso, anoIngresso;
-                printf("Digite o codigo do curso do aluno:");
-                scanf("%d", &curso);
-                printf("Digite o ano de ingresso do aluno:");
-                scanf("%d", &anoIngresso);
-                a = inserir(a,lado,tipo,resp2,AddAluno(curso, anoIngresso));
-            }
+                else {
+                    printf("Digite a chave do elemento:");
+                    scanf("%d", &resp2);
+                    a = inserirElemento(a, lado, resp2, noPai);
+                }
         }
         if(resp==2){
             int resp2;
@@ -81,12 +75,9 @@ int main() { //aluno
             int resp2;
             printf("Digite o elemento a ser buscado:");
             scanf("%d", &resp2);
-            int i = BuscarTipo(a, resp2);
-            if(i == 1) {
                 Alunos *alunos;
                 alunos = Buscar(a,resp2);
-                imprimir(alunos, i);
-            }
+                imprimirAluno(alunos);
         }
         if(resp==4){
             if(balanceamento(a))
@@ -103,7 +94,6 @@ int main() { //aluno
         if(resp==7){
             resp = -1;
         }
-
     }
     return 0;
 }

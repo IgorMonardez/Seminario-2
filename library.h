@@ -17,16 +17,13 @@ int existe(ArvoreBin a, int x);
 
 //Imprimir Largura e função auxiliar
 
-void imprimirNivel(ArvoreBin a,int cont,int nivel);
 void imprimirLargura(ArvoreBin a,int nivel);
 
 //Inserir elementos
 
-ArvoreBin inserir(ArvoreBin a, char lado,int tipo, int chave, void* objeto);
+ArvoreBin inserir(ArvoreBin a, char lado, int chave, void* objeto, int noPai);
 
 //Buscar elemento
-
-int BuscarTipo(ArvoreBin a,int chave);
 void* Buscar(ArvoreBin a, int chave);
 
 

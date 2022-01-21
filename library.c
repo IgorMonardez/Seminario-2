@@ -6,7 +6,6 @@
 
 struct arvoreBin {
     int chave;
-    int tipo;
     void *obj;
     struct arvoreBin *dir,*esq;
 };
@@ -58,27 +57,24 @@ int existe(ArvoreBin a, int x) {
     }
 }
 
-ArvoreBin inserir(ArvoreBin a, char lado,int tipo, int chave, void* objeto) {
+ArvoreBin inserir(ArvoreBin a, char lado, int chave, void* objeto, int noPai) {
     if(a == NULL) {
         a = (ArvoreBin) malloc(sizeof(struct arvoreBin));
         a->chave = chave;
-        a->tipo = tipo;
         a->obj = objeto;
         a->esq = NULL;
         a->dir = NULL;
-        printf("%d", a->chave);
         return a;
     }
     else {
-        if(a->dir==NULL && a->esq==NULL && lado=='e')
-            a->esq = inserir(a->esq, lado, tipo, chave, objeto);
+        if(lado=='e' && a->chave == noPai)
+            a->esq = inserir(a->esq, lado,  chave, objeto, noPai);
         else {
-            if (a->dir == NULL && a->esq == NULL && lado == 'd')
-                a->dir = inserir(a->dir, lado, tipo, chave, objeto);
+            if (lado == 'd' && a->chave == noPai)
+                a->dir = inserir(a->dir, lado, chave, objeto, noPai);
             else {
-                a->esq = inserir(a->esq, lado, tipo, chave, objeto);
-                a->dir = inserir(a->dir, lado, tipo, chave, objeto);
-
+                a->esq = inserir(a->esq, lado,  chave, objeto, noPai);
+                a->dir = inserir(a->dir, lado, chave, objeto, noPai);
             }
         }
     }
@@ -104,23 +100,6 @@ void imprimirLargura(ArvoreBin a,int nivel) {
             printf("\n");
             imprimirLargura(a,nivel+1);
         }
-    }
-}
-
-int BuscarTipo(ArvoreBin a, int chave) {
-    int result = existe(a, chave);
-    if(result == 0)
-        printf("Elemento não existe\n");
-    else
-    if(a->chave == chave)
-        return a->tipo;
-    else {
-        int aux = 0;
-        aux = BuscarTipo(a->esq,chave);
-        if(aux!=0)
-            return aux;
-        else
-            return BuscarTipo(a->dir,chave);
     }
 }
 
