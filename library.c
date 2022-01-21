@@ -78,6 +78,7 @@ ArvoreBin inserir(ArvoreBin a, char lado,int tipo, int chave, void* objeto) {
             else {
                 a->esq = inserir(a->esq, lado, chave, tipo, objeto);
                 a->dir = inserir(a->dir, lado, chave, tipo, objeto);
+
             }
         }
     }
