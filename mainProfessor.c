@@ -22,10 +22,12 @@ Professores *AddProfessor(char nome[100],float salario) {
     return p;
 }
 
-ArvoreBin inserirElemento(ArvoreBin a, char lado, int chave, int noPai){
-    int matricula;
+ArvoreBin inserirElemento(ArvoreBin a, char lado, int noPai){
+    int matricula,chave;
     double salario;
     char nome[100];
+    printf("> Digite a chave do elemento:");
+    scanf("%d", &chave);
     fflush(stdin);
     printf("> Digite o nome do professor: ");
     scanf(" %s",nome);
@@ -36,7 +38,7 @@ ArvoreBin inserirElemento(ArvoreBin a, char lado, int chave, int noPai){
     return inserir(a, lado, chave, AddProfessor(nome,salario), noPai);
 }
 
-int main() { //aluno
+int main() {
     ArvoreBin a = NULL;
     int resp = 0;
     while (resp!=-1){
@@ -44,18 +46,16 @@ int main() { //aluno
         scanf("%d",&resp);
         if (resp==1) {
             int resp2,noPai;
-            printf("> Digite a chave do elemento:");
-            scanf("%d", &resp2);
-            char lado;
+            char lado = NULL;
             printf("> De qual no pai: ");
             scanf("%d",&noPai);
             if(existe(a,noPai)||noPai==-1) {
-                if(noPai!=-1) {
+                if(noPai!=-1) { // nó ráiz
                     printf("> Qual lado (d-direito, e- esquerdo): ");
                     scanf(" %c", &lado);
                     fflush(stdin);
                 }
-                    a = inserirElemento(a, lado, resp2, noPai);
+                a = inserirElemento(a, lado, noPai);
             }
             else
                 printf("No pai nao existe!\n");
