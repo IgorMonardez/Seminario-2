@@ -46,19 +46,19 @@ int main() { //aluno
             int resp2,noPai;
             printf("> Digite a chave do elemento:");
             scanf("%d", &resp2);
-            char lado = NULL;
-                printf("> De qual no pai: ");
-                scanf("%d",&noPai);
-                if(existe(a,noPai)||noPai==-1) {
-                    if(noPai!=-1) {
-                        printf("> Qual lado (d-direito, e- esquerdo): ");
-                        scanf(" %c", &lado);
-                        fflush(stdin);
-                    }
-                    a = inserirElemento(a, lado, resp2, noPai);
+            char lado;
+            printf("> De qual no pai: ");
+            scanf("%d",&noPai);
+            if(existe(a,noPai)||noPai==-1) {
+                if(noPai!=-1) {
+                    printf("> Qual lado (d-direito, e- esquerdo): ");
+                    scanf(" %c", &lado);
+                    fflush(stdin);
                 }
-                else
-                    printf("No pai nao existe!\n");
+                    a = inserirElemento(a, lado, resp2, noPai);
+            }
+            else
+                printf("No pai nao existe!\n");
         }
         if(resp==2){
             int resp2;
