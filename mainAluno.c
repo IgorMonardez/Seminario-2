@@ -46,7 +46,7 @@ int main() { //aluno
     ArvoreBin a = NULL;
     int resp = 0;
     while (resp!=-1){
-        printf("<1>- Inserir elemento\n<2>- Verificar se elemento existe\n<3>- Buscar o elemento e imprimi-lo\n<4>- Verificar se e balanceada\n<5>- Calcular altura\n<6>- Imprimir em largura\n<7>- Sair\nresp:");
+        printf("<1>- Inserir elemento\n<2>- Verificar se elemento existe\n<3>- Buscar o elemento e imprimi-lo\n<4>- Verificar se a arvore esta balanceada\n<5>- Calcular altura\n<6>- Imprimir em largura\n<7>- Sair\nresp:");
         scanf("%d",&resp);
         if (resp==1){
             int noPai;
