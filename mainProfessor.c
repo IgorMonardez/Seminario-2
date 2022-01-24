@@ -4,7 +4,6 @@
 #include <string.h>
 
 typedef struct professores{
-    int matricula;
     char nome[100];
     float salario;
 }Professores;
@@ -12,14 +11,12 @@ typedef struct professores{
 void imprimir(void* pVoid) {
     Professores *p;
     p = (Professores*) pVoid;
-    printf("Matricula - %d\n",p->matricula);
     printf("Nome - %s\n",p->nome);
     printf("Salario - %.2f\n",p->salario);
 }
 
-Professores *AddProfessor(int matricula,char nome[100],float salario) {
+Professores *AddProfessor(char nome[100],float salario) {
     Professores *p = (Professores*)malloc(sizeof(Professores));
-    p->matricula = matricula;
     strcpy(p->nome,nome);
     p->salario = salario;
     return p;
@@ -29,8 +26,6 @@ ArvoreBin inserirElemento(ArvoreBin a, char lado, int chave, int noPai){
     int matricula;
     double salario;
     char nome[100];
-    printf("> Digite a matricula do professor: ");
-    scanf("%d", &matricula);
     fflush(stdin);
     printf("> Digite o nome do professor: ");
     scanf(" %s",nome);
@@ -38,7 +33,7 @@ ArvoreBin inserirElemento(ArvoreBin a, char lado, int chave, int noPai){
     printf("> Digite o Salario do professor: ");
     scanf("%lf", &salario);
     fflush(stdin);
-    return inserir(a, lado, chave, AddProfessor(matricula,nome,salario), noPai);
+    return inserir(a, lado, chave, AddProfessor(nome,salario), noPai);
 }
 
 int main() { //aluno
@@ -81,8 +76,11 @@ int main() { //aluno
             printf("Digite o elemento a ser buscado:");
             scanf("%d", &resp2);
             Professores *professores;
-            professores = Buscar(a,resp2);
-            imprimir(professores);
+            professores = (struct professores *)Buscar(a,resp2);
+            if(professores!=NULL)
+                imprimir(professores);
+            else
+                printf("Aluno nao existe!\n");
         }
         if(resp==4){
             if(balanceamento(a))

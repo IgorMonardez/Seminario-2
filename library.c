@@ -81,7 +81,7 @@ ArvoreBin inserir(ArvoreBin a, char lado, int chave, void* objeto, int noPai) {
     return a;
 }
 
-void imprimirNivel(ArvoreBin a,int cont, int nivel){
+int imprimirNivel(ArvoreBin a,int cont, int nivel){
     if(a!=NULL) {
         if(cont == nivel)
             printf("%d ",a->chave);
@@ -106,9 +106,8 @@ void imprimirLargura(ArvoreBin a,int nivel) {
 void* Buscar(ArvoreBin a, int chave) {
     int result = existe(a, chave);
     if(result == 0)
-        printf("Elemento não existe\n");
-    else
-    if(a->chave == chave)
+        return NULL;
+    else if(a->chave == chave)
         return a->obj;
     else {
         void *aux = Buscar(a->esq,chave);

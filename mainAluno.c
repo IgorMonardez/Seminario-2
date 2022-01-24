@@ -4,7 +4,6 @@
 #include <string.h>
 
 typedef struct alunos{
- int matriculaAluno;
  char nomeAluno[100];
  char curso[20];
  int anoIngresso;
@@ -13,15 +12,13 @@ typedef struct alunos{
 void imprimir(void* pVoid) {
     Alunos *a;
     a = (Alunos*) pVoid;
-    printf("Matricula - %d\n",a->matriculaAluno);
     printf("Nome - %s\n",a->nomeAluno);
     printf("Curso - %s\n",a->curso);
     printf("Ano Ingresso - %d\n",a->anoIngresso);
 }
 
-Alunos *AddAluno(int matricula,char nomeAluno[100],char curso[20], int anoIngresso) {
+Alunos *AddAluno(char nomeAluno[100],char curso[20], int anoIngresso) {
     Alunos *a = (Alunos*)malloc(sizeof(Alunos));
-    a->matriculaAluno = matricula;
     strcpy(a->nomeAluno,nomeAluno);
     strcpy(a->curso,curso);
     a->anoIngresso = anoIngresso;
@@ -33,8 +30,6 @@ ArvoreBin inserirAluno(ArvoreBin a, char lado, int noPai){
     int matriculaAluno, anoIngresso, chave;
     printf("Digite a chave do elemento:");
     scanf("%d", &chave);
-    printf("Digite a matricula do aluno:");
-    scanf("%d", &matriculaAluno);
     fflush(stdin);
     printf("Digite o nome do aluno: ");
     scanf(" %s", nome);
@@ -44,7 +39,7 @@ ArvoreBin inserirAluno(ArvoreBin a, char lado, int noPai){
     fflush(stdin);
     printf("Digite o ano de ingresso do aluno: ");
     scanf("%d", &anoIngresso);
-    return inserir(a,lado,chave,AddAluno(matriculaAluno,nome,curso,anoIngresso),noPai);
+    return inserir(a,lado,chave,AddAluno(nome,curso,anoIngresso),noPai);
 }
 
 int main() { //aluno
@@ -85,8 +80,11 @@ int main() { //aluno
             printf("Digite o elemento a ser buscado:");
             scanf("%d", &resp2);
             Alunos *alunos;
-            alunos = Buscar(a,resp2);
-            imprimir(alunos);
+            alunos = (struct alunos *)Buscar(a,resp2);
+            if(alunos!=NULL)
+                imprimir(alunos);
+            else
+                printf("Aluno nao existe!\n");
         }
         if(resp==4){
             if(balanceamento(a))
