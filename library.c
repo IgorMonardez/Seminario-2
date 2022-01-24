@@ -73,8 +73,10 @@ ArvoreBin inserir(ArvoreBin a, char lado, int chave, void* objeto, int noPai) {
             if (lado == 'd' && a->dir==NULL && a->chave == noPai)
                 a->dir = inserir(a->dir, lado, chave, objeto, noPai);
             else {
-                a->esq = inserir(a->esq, lado,  chave, objeto, noPai);
-                a->dir = inserir(a->dir, lado, chave, objeto, noPai);
+                if(existe(a->esq, noPai))
+                    a->esq = inserir(a->esq, lado,  chave, objeto, noPai);
+                else if(existe(a->dir, noPai))
+                    a->dir = inserir(a->dir, lado, chave, objeto, noPai);
             }
         }
     }
@@ -86,8 +88,8 @@ int imprimirNivel(ArvoreBin a,int cont, int nivel){
         if(cont == nivel)
             printf("%d ",a->chave);
         else {
-            imprimirNivel(a->dir,cont+1,nivel);
             imprimirNivel(a->esq,cont+1,nivel);
+            imprimirNivel(a->dir,cont+1,nivel);
         }
     }
 }
