@@ -63,7 +63,8 @@ int main() { //aluno
                 else
                     a = inserirElemento(a, lado, resp2, noPai);
             }
-            a = inserirElemento(a, lado, resp2, noPai);
+            else
+                a = inserirElemento(a, lado, resp2, noPai);
         }
         if(resp==2){
             int resp2;
