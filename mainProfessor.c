@@ -80,7 +80,7 @@ int main() { //aluno
             if(professores!=NULL)
                 imprimir(professores);
             else
-                printf("Aluno nao existe!\n");
+                printf("Professor nao existe!\n");
         }
         if(resp==4){
             if(balanceamento(a))
