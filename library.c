@@ -67,10 +67,10 @@ ArvoreBin inserir(ArvoreBin a, char lado, int chave, void* objeto, int noPai) {
         return a;
     }
     else {
-        if(lado=='e' && a->chave == noPai)
+        if(lado=='e' && a->esq==NULL && a->chave == noPai)
             a->esq = inserir(a->esq, lado,  chave, objeto, noPai);
         else {
-            if (lado == 'd' && a->chave == noPai)
+            if (lado == 'd' && a->dir==NULL && a->chave == noPai)
                 a->dir = inserir(a->dir, lado, chave, objeto, noPai);
             else {
                 a->esq = inserir(a->esq, lado,  chave, objeto, noPai);

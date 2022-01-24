@@ -28,9 +28,11 @@ Alunos *AddAluno(int matricula,char nomeAluno[100],char curso[20], int anoIngres
     return a;
 }
 
-ArvoreBin inserirElemento(ArvoreBin a, char lado, int chave, int noPai) {
+ArvoreBin inserirAluno(ArvoreBin a, char lado, int noPai){
     char curso[20], nome[100];
-    int matriculaAluno, anoIngresso;
+    int matriculaAluno, anoIngresso, chave;
+    printf("Digite a chave do elemento:");
+    scanf("%d", &chave);
     printf("Digite a matricula do aluno:");
     scanf("%d", &matriculaAluno);
     fflush(stdin);
@@ -53,33 +55,30 @@ int main() { //aluno
         scanf("%d",&resp);
         if (resp==1){
             int resp2,noPai;
-            printf("Digite a chave do elemento:");
-            scanf("%d", &resp2);
             char lado;
             if(a!=NULL){
-                printf("Qual lado (d-direito, e- esquerdo): ");
-                scanf(" %c",&lado);
-                fflush(stdin);
                 printf("De qual nó pai (chave): ");
                 scanf("%d",&noPai);
-                if(!existe(a,noPai))
-                    printf("Esse no pai nao existe\n.");
+                if(existe(a, noPai)) {
+                    printf("Qual lado (d-direito, e- esquerdo): ");
+                    scanf(" %c", &lado);
+                    fflush(stdin);
+                    a = inserirAluno(a, lado, noPai);
+                }
                 else
-                    a = inserirElemento(a, lado, resp2, noPai);
+                    printf("No pai nao existe!\n");
             }
-            else {
-                a = inserirElemento(a, lado, resp2, noPai);
-            }
-
+            else
+                a = inserirAluno(a, lado, noPai);
         }
         if(resp==2){
             int resp2;
             printf("Digite o elemento a ser verificado:");
             scanf("%d", &resp2);
             if(existe(a,resp2))
-                printf("O elementos %d existe\n",resp2);
+                printf("O elemento %d existe\n",resp2);
             else
-                printf("O elementos %d nao existe\n",resp2);
+                printf("O elemento %d nao existe\n",resp2);
         }
         if(resp==3){
             int resp2;
