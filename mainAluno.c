@@ -28,6 +28,23 @@ Alunos *AddAluno(int matricula,char nomeAluno[100],char curso[20], int anoIngres
     return a;
 }
 
+ArvoreBin inserirElemento(ArvoreBin a, char lado, int chave, int noPai) {
+    char curso[20], nome[100];
+    int matriculaAluno, anoIngresso;
+    printf("Digite a matricula do aluno:");
+    scanf("%d", &matriculaAluno);
+    fflush(stdin);
+    printf("Digite o nome do aluno: ");
+    scanf(" %s", nome);
+    fflush(stdin);
+    printf("Digite o curso do aluno: ");
+    scanf(" %s", curso);
+    fflush(stdin);
+    printf("Digite o ano de ingresso do aluno: ");
+    scanf("%d", &anoIngresso);
+    return inserir(a,lado,chave,AddAluno(matriculaAluno,nome,curso,anoIngresso),noPai);
+}
+
 int main() { //aluno
     ArvoreBin a = NULL;
     int resp = 0;
@@ -39,27 +56,18 @@ int main() { //aluno
             printf("Digite a chave do elemento:");
             scanf("%d", &resp2);
             char lado;
+
             if(a!=NULL){
                 printf("Qual lado (d-direito, e- esquerdo): ");
                 scanf(" %c",&lado);
                 fflush(stdin);
                 printf("De qual nó pai (chave): ");
                 scanf("%d",&noPai);
+                if(!existe(a,noPai))
+                    printf("Esse no pai nao existe\n.");
+                else
+                    a = inserirElemento(a, lado, resp2, noPai);
             }
-            char curso[20], nome[100];
-            int matriculaAluno, anoIngresso;
-            printf("Digite a matricula do aluno:");
-            scanf("%d", &matriculaAluno);
-            fflush(stdin);
-            printf("Digite o nome do aluno: ");
-            scanf(" %s", nome);
-            fflush(stdin);
-            printf("Digite o curso do aluno: ");
-            scanf(" %s", curso);
-            fflush(stdin);
-            printf("Digite o ano de ingresso do aluno: ");
-            scanf("%d", &anoIngresso);
-            a = inserir(a,lado,resp2,AddAluno(matriculaAluno,nome,curso,anoIngresso),noPai);
         }
         if(resp==2){
             int resp2;

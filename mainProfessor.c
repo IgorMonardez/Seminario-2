@@ -25,36 +25,43 @@ Professores *AddProfessor(int matricula,char nome[100],float salario) {
     return p;
 }
 
+ArvoreBin inserirElemento(ArvoreBin a, char lado, int chave, int noPai){
+    int matricula;
+    double salario;
+    char nome[100];
+    printf("> Digite a matricula do professor: ");
+    scanf("%d", &matricula);
+    fflush(stdin);
+    printf("> Digite o nome do professor: ");
+    scanf(" %s",nome);
+    fflush(stdin);
+    printf("> Digite o Salario do professor: ");
+    scanf("%lf", &salario);
+    fflush(stdin);
+    return inserir(a, lado, chave, AddProfessor(matricula,nome,salario), noPai);
+}
+
 int main() { //aluno
     ArvoreBin a = NULL;
     int resp = 0;
     while (resp!=-1){
         printf("<1>- Inserir elemento\n<2>- Verificar se elemento existe\n<3>- Buscar o elemento e imprimi-lo\n<4>- Verificar se e balanceada\n<5>- Calcular altura\n<6>- Imprimir em largura\n<7>- Sair\nresp:");
         scanf("%d",&resp);
-        if (resp==1){
+        if (resp==1) {
             int resp2,noPai;
             printf("> Digite a chave do elemento:");
             scanf("%d", &resp2);
             char lado;
-            char nome[100];
             if(a!=NULL){
                 printf("> Qual lado (d-direito, e- esquerdo): ");
                 scanf(" %c",&lado);
                 fflush(stdin);
                 printf("> De qual no pai: ");
                 scanf("%d",&noPai);
+                if(!existe(a,noPai))
+                    printf("Esse \"no pai\" nao existe\n.");
             }
-            int matricula;
-            double salario;
-            printf(">Digite a matricula do professor: ");
-            scanf("%d", &matricula);
-            fflush(stdin);
-            printf(">Digite o nome do professor: ");
-            scanf(" %s",nome);
-            fflush(stdin);
-            printf(">Digite o Salario do professor: ");
-            scanf("%lf", &salario);
-            a = inserir(a,lado,resp2,AddProfessor(matricula,nome,salario),noPai);
+            a = inserirElemento(a, lado, resp2, noPai);
         }
         if(resp==2){
             int resp2;
