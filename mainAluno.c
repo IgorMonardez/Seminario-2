@@ -27,7 +27,7 @@ Alunos *AddAluno(char nomeAluno[100],char curso[20], int anoIngresso) {
 
 ArvoreBin inserirAluno(ArvoreBin a, char lado, int noPai){
     char curso[20], nome[100];
-    int matriculaAluno, anoIngresso, chave;
+    int anoIngresso, chave;
     printf("Digite a chave do elemento:");
     scanf("%d", &chave);
     fflush(stdin);
@@ -49,22 +49,20 @@ int main() { //aluno
         printf("<1>- Inserir elemento\n<2>- Verificar se elemento existe\n<3>- Buscar o elemento e imprimi-lo\n<4>- Verificar se e balanceada\n<5>- Calcular altura\n<6>- Imprimir em largura\n<7>- Sair\nresp:");
         scanf("%d",&resp);
         if (resp==1){
-            int resp2,noPai;
-            char lado;
-            if(a!=NULL){
+            int noPai;
+            char lado = NULL;
                 printf("De qual nó pai (chave): ");
                 scanf("%d",&noPai);
-                if(existe(a, noPai)) {
-                    printf("Qual lado (d-direito, e- esquerdo): ");
-                    scanf(" %c", &lado);
-                    fflush(stdin);
+                if(existe(a, noPai)||noPai==-1) {
+                    if(noPai!=-1) {
+                        printf("> Qual lado (d-direito, e- esquerdo): ");
+                        scanf(" %c", &lado);
+                        fflush(stdin);
+                    }
                     a = inserirAluno(a, lado, noPai);
                 }
                 else
                     printf("No pai nao existe!\n");
-            }
-            else
-                a = inserirAluno(a, lado, noPai);
         }
         if(resp==2){
             int resp2;
