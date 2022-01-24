@@ -56,7 +56,6 @@ int main() { //aluno
             printf("Digite a chave do elemento:");
             scanf("%d", &resp2);
             char lado;
-
             if(a!=NULL){
                 printf("Qual lado (d-direito, e- esquerdo): ");
                 scanf(" %c",&lado);
@@ -68,6 +67,10 @@ int main() { //aluno
                 else
                     a = inserirElemento(a, lado, resp2, noPai);
             }
+            else {
+                a = inserirElemento(a, lado, resp2, noPai);
+            }
+
         }
         if(resp==2){
             int resp2;

@@ -60,6 +60,8 @@ int main() { //aluno
                 scanf("%d",&noPai);
                 if(!existe(a,noPai))
                     printf("Esse \"no pai\" nao existe\n.");
+                else
+                    a = inserirElemento(a, lado, resp2, noPai);
             }
             a = inserirElemento(a, lado, resp2, noPai);
         }
