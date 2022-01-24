@@ -53,15 +53,16 @@ int main() { //aluno
             scanf("%d", &resp2);
             char lado;
             if(a!=NULL){
-                printf("> Qual lado (d-direito, e- esquerdo): ");
-                scanf(" %c",&lado);
-                fflush(stdin);
                 printf("> De qual no pai: ");
                 scanf("%d",&noPai);
-                if(!existe(a,noPai))
-                    printf("Esse \"no pai\" nao existe\n.");
-                else
+                if(existe(a,noPai)) {
+                    printf("> Qual lado (d-direito, e- esquerdo): ");
+                    scanf(" %c",&lado);
+                    fflush(stdin);
                     a = inserirElemento(a, lado, resp2, noPai);
+                }
+                else
+                    printf("Esse \"no pai\" nao existe\n.");
             }
             else
                 a = inserirElemento(a, lado, resp2, noPai);
