@@ -123,6 +123,7 @@ ArvoreBin Destruir(ArvoreBin a) {
     if(a!=NULL) {
         a->esq = Destruir(a->esq);
         a->dir = Destruir(a->dir);
+        free(a->obj);
         free(a);
     }
     return NULL;
